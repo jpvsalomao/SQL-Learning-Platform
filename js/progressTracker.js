@@ -18,7 +18,6 @@ export function updateProgress() {
     document.getElementById('completed-questions').textContent = completedQuestions;
     document.getElementById('total-questions').textContent = totalQuestions;
 
-    // Update progress for each set
     Object.keys(questionSets).forEach(set => {
         const setProgress = progressTracker[set].size;
         const setTotal = questionSets[set].length;
@@ -51,18 +50,13 @@ function compareResults(userResult, correctResult, options = {}) {
             return false;
         }
 
-        // Create objects with column names as keys for each row
         const userRows = userValues.map(row => 
-            Object.fromEntries(userResult[i].columns.map((col, index) => [col, row[index]])));
+            Object.fromEntries(userResult[i].columns.map((col, index) => [col.toLowerCase(), row[index]])));
         const correctRows = correctValues.map(row => 
-            Object.fromEntries(correctResult[i].columns.map((col, index) => [col, row[index]])));
+            Object.fromEntries(correctResult[i].columns.map((col, index) => [col.toLowerCase(), row[index]])));
 
-        // Compare rows
         for (let j = 0; j < userRows.length; j++) {
-            const userRow = userRows[j];
-            const correctRow = correctRows[j];
-
-            if (!compareRows(userRow, correctRow, options)) {
+            if (!compareRows(userRows[j], correctRows[j], options)) {
                 return false;
             }
         }
