@@ -50,10 +50,8 @@ function compareResults(userResult, correctResult, options = {}) {
             return false;
         }
 
-        const userRows = userValues.map(row => 
-            Object.fromEntries(userResult[i].columns.map((col, index) => [col.toLowerCase(), row[index]])));
-        const correctRows = correctValues.map(row => 
-            Object.fromEntries(correctResult[i].columns.map((col, index) => [col.toLowerCase(), row[index]])));
+        const userRows = userValues.map(row => row.map(String));
+        const correctRows = correctValues.map(row => row.map(String));
 
         for (let j = 0; j < userRows.length; j++) {
             if (!compareRows(userRows[j], correctRows[j], options)) {
@@ -66,23 +64,19 @@ function compareResults(userResult, correctResult, options = {}) {
 }
 
 function compareRows(userRow, correctRow, options) {
-    const userKeys = Object.keys(userRow);
-    const correctKeys = Object.keys(correctRow);
-
-    if (userKeys.length !== correctKeys.length) {
+    if (userRow.length !== correctRow.length) {
         return false;
     }
 
-    for (let key of correctKeys) {
-        if (!userRow.hasOwnProperty(key)) {
-            return false;
-        }
+    const sortedUserRow = [...userRow].sort();
+    const sortedCorrectRow = [...correctRow].sort();
 
-        const userValue = userRow[key];
-        const correctValue = correctRow[key];
+    for (let i = 0; i < sortedUserRow.length; i++) {
+        const userValue = sortedUserRow[i];
+        const correctValue = sortedCorrectRow[i];
 
-        if (options.approximateComparison && typeof userValue === 'number' && typeof correctValue === 'number') {
-            if (Math.abs(userValue - correctValue) > 0.001) {
+        if (options.approximateComparison && !isNaN(userValue) && !isNaN(correctValue)) {
+            if (Math.abs(parseFloat(userValue) - parseFloat(correctValue)) > 0.001) {
                 return false;
             }
         } else if (userValue !== correctValue) {
