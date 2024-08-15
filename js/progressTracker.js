@@ -51,23 +51,48 @@ function compareResults(userResult, correctResult, options = {}) {
             return false;
         }
 
-        for (let j = 0; j < userValues.length; j++) {
-            const userRow = userValues[j];
-            const correctRow = correctValues[j];
+        // Create objects with column names as keys for each row
+        const userRows = userValues.map(row => 
+            Object.fromEntries(userResult[i].columns.map((col, index) => [col, row[index]])));
+        const correctRows = correctValues.map(row => 
+            Object.fromEntries(correctResult[i].columns.map((col, index) => [col, row[index]])));
 
-            if (userRow.length !== correctRow.length) {
+        // Compare rows
+        for (let j = 0; j < userRows.length; j++) {
+            const userRow = userRows[j];
+            const correctRow = correctRows[j];
+
+            if (!compareRows(userRow, correctRow, options)) {
                 return false;
             }
+        }
+    }
 
-            for (let k = 0; k < userRow.length; k++) {
-                if (options.approximateComparison && typeof userRow[k] === 'number' && typeof correctRow[k] === 'number') {
-                    if (Math.abs(userRow[k] - correctRow[k]) > 0.001) {
-                        return false;
-                    }
-                } else if (userRow[k] !== correctRow[k]) {
-                    return false;
-                }
+    return true;
+}
+
+function compareRows(userRow, correctRow, options) {
+    const userKeys = Object.keys(userRow);
+    const correctKeys = Object.keys(correctRow);
+
+    if (userKeys.length !== correctKeys.length) {
+        return false;
+    }
+
+    for (let key of correctKeys) {
+        if (!userRow.hasOwnProperty(key)) {
+            return false;
+        }
+
+        const userValue = userRow[key];
+        const correctValue = correctRow[key];
+
+        if (options.approximateComparison && typeof userValue === 'number' && typeof correctValue === 'number') {
+            if (Math.abs(userValue - correctValue) > 0.001) {
+                return false;
             }
+        } else if (userValue !== correctValue) {
+            return false;
         }
     }
 
