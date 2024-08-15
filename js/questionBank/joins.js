@@ -29,7 +29,7 @@ export const joins = [
         resultComparisonOptions: {
             ignoreColumnNames: true,
             approximateComparison: true,
-            ignoreColumnOrder: true
+            
         },
         tips: [
             "Use a JOIN to combine the customers and orders tables.",
