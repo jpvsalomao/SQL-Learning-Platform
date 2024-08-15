@@ -28,7 +28,8 @@ export const joins = [
         answer: "SELECT c.name, c.email, SUM(o.total_amount) as total_orders FROM customers c JOIN orders o ON c.id = o.customer_id GROUP BY c.id",
         resultComparisonOptions: {
             ignoreColumnNames: true,
-            approximateComparison: true
+            approximateComparison: true,
+            ignoreColumnOrder: true
         },
         tips: [
             "Use a JOIN to combine the customers and orders tables.",
