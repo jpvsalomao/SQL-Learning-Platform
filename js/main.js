@@ -60,7 +60,12 @@ window.checkAnswer = function(questionId) {
         const userResult = executeQuery(userQuery);
         const correctResult = executeQuery(question.answer);
         
-        const result = checkAnswer(questionId, userResult, correctResult, question.resultComparisonOptions, currentSet);
+        const options = {
+            ...question.resultComparisonOptions,
+            ignoreColumnNames: true
+        };
+        
+        const result = checkAnswer(questionId, userResult, correctResult, options, currentSet);
         setOutputValue(questionId, result);
     } catch (error) {
         setOutputValue(questionId, "Error: " + error.message);
