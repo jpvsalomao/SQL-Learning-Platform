@@ -6,9 +6,9 @@ let progressTracker = {
     joins: new Set(),
     advanced: new Set(),
     subqueries: new Set(),
-    windowFunctions: new Set(),  // Ensure these match your question sets
-    aggregateFunctions: new Set(),  // New question set entry
-    stringFunctions: new Set()  // New question set entry
+    windowFunctions: new Set(),
+    aggregateFunctions: new Set(),
+    stringFunctions: new Set()
 };
 
 export function updateProgress() {
