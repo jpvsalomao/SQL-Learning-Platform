@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.navigation, .question {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.CodeMirror {
+    border: 1px solid #ccc;
+    height: auto;
+}
+.output {
+    background-color: #f0f0f0;
+    padding: 10px;
+    white-space: pre-wrap;
+}
+.tips {
+    margin-top: 10px;
+    font-style: italic;
+}
+.difficulty {
+    font-weight: bold;
+    color: #4a4a4a;
+}
+.easy { color: #4CAF50; }
+.medium { color: #FFC107; }
+.hard { color: #F44336; }
+.hidden { display: none; }

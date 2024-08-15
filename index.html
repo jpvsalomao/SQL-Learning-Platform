@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Learning Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/sql/sql.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/monokai.min.css">
+</head>
+<body>
+    <h1>SQL Learning Platform</h1>
+    <div id="navigation-container" class="navigation">
+        <h2>Welcome, <span id="user-name">Guest</span>!</h2>
+        <p>Email: <span id="user-email">guest@example.com</span></p>
+        
+        <h3>Choose a question set:</h3>
+        <div id="question-set-buttons">
+            <!-- Buttons for question sets will be generated here -->
+        </div>
+        
+        <h3>Your Progress:</h3>
+        <p>Total completed questions: <span id="completed-questions">0</span></p>
+        <p>Total questions: <span id="total-questions">0</span></p>
+        <p>SQL Basics progress: <span id="progress-basics">0/0</span></p>
+        <p>SQL Joins progress: <span id="progress-joins">0/0</span></p>
+        <p>Advanced SQL progress: <span id="progress-advanced">0/0</span></p>
+        <p>Subqueries progress: <span id="progress-subqueries">0/0</span></p>
+        <p>Window Functions progress: <span id="progress-windowFunctions">0/0</span></p> <!-- Ensure this matches your question set -->
+        <p>Aggregate Functions progress: <span id="progress-aggregateFunctions">0/0</span></p> <!-- New progress tracker -->
+        <p>String Functions progress: <span id="progress-stringFunctions">0/0</span></p> <!-- New progress tracker -->
+
+    </div>
+    <div id="quiz-container" class="hidden"></div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
