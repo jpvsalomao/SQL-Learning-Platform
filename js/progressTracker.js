@@ -46,14 +46,14 @@ function compareResults(userResult, correctResult, options = {}) {
         const userValues = userResult[i].values;
         const correctValues = correctResult[i].values;
 
-        if (userValues.length !== correctValues.length) {
+        if (userValues.length < correctValues.length) {
             return false;
         }
 
         const userRows = userValues.map(row => row.map(String));
         const correctRows = correctValues.map(row => row.map(String));
 
-        for (let j = 0; j < userRows.length; j++) {
+        for (let j = 0; j < correctRows.length; j++) {
             if (!compareRows(userRows[j], correctRows[j], options)) {
                 return false;
             }
@@ -64,14 +64,14 @@ function compareResults(userResult, correctResult, options = {}) {
 }
 
 function compareRows(userRow, correctRow, options) {
-    if (userRow.length !== correctRow.length) {
+    if (userRow.length < correctRow.length) {
         return false;
     }
 
-    const sortedUserRow = [...userRow].sort();
     const sortedCorrectRow = [...correctRow].sort();
+    const sortedUserRow = [...userRow].slice(0, correctRow.length).sort();
 
-    for (let i = 0; i < sortedUserRow.length; i++) {
+    for (let i = 0; i < sortedCorrectRow.length; i++) {
         const userValue = sortedUserRow[i];
         const correctValue = sortedCorrectRow[i];
 
